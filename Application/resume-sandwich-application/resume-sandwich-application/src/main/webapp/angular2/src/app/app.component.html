@@ -1,0 +1,768 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<html>
+<head>
+<style>
+
+</style>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script type="text/javascript" src="html2canvas.js"></script>
+<script src="//mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+
+<body>
+<header>
+<img src="assets/images/Logo.svg" width=200px height=100px>
+</header>
+
+<div id="sidebar">
+<img src="assets/images/BunTop.svg">
+	<ul>
+		<li>Select Resume</li>
+		<li>General Info</li>
+		<li>Education</li>
+		<li>Skills</li>
+		<li>Project</li>
+		<li>Work Experience</li>
+		<li>College Engagement</li>
+		<li>Volunteer Experience</li>
+		<li>Download</li>
+	</ul>
+	<img src="assets/images/BunTop.svg">
+</div>
+
+<main id="mainpage">
+	<div *ngFor="let resume of resumes">
+		<div *ngIf="resume.id===2">
+			<div>
+			<div id="headline">
+				<h1>Resume version {{ resume.id }}.</h1>
+				<div id="triangle"></div>
+			</div>
+				<div id="fields">
+					
+					<div *ngIf="resumes">
+					
+						<mat-horizontal-stepper [linear]="true" #stepper>
+								<mat-step [stepControl]="resumeDisplay">
+										<div class="navigation">
+											
+												<button mat-button (click)="download()" *ngIf="resume['userInfoEntityList'].length > 0">Download Resume</button>
+											
+											<button mat-button matStepperNext>
+												  Modify
+											</button>
+										</div>
+										<div *ngIf="resume.id===2" id="doctest">
+		
+										<div *ngFor="let info of resume['userInfoEntityList']">
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-align: center; background: white;">
+												<span style="font-family: 'times new roman', times;"><strong>{{info.firstname}}
+														{{info.lastname}}</strong></span>
+											</p>
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-align: center; background: white;">
+												<span
+													style="font-size: 10pt; font-family: 'times new roman', times;">{{info.phone}}</span>
+											</p>
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-align: center; background: white;">
+												<span
+													style="font-size: 10pt; font-family: 'times new roman', times;">{{info.email}}</span>
+											</p>
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-align: center; background: white;">
+												<span style="font-size: 10.0pt;">&nbsp;</span>
+											</p>
+										</div>
+					
+										
+											<div *ngIf="resume['educationEntityList'].length > 0">
+											<p
+												style="margin-bottom: .0001pt; line-height: normal; background: white;">
+												<strong><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">EDUCATION</span></strong>
+											</p>
+											</div>
+										<div *ngFor="let edu of resume['educationEntityList']">
+											<p
+												style="margin-bottom: .0001pt; text-indent: .25in; line-height: normal; background: white;">
+												<strong><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">{{edu.universityName}}</span></strong>
+											</p>
+											<p
+												style="line-height: normal; background: white; margin: 0in 0in .0001pt .5in;">
+												<em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">{{edu.degree}},
+														{{edu.major}} with a concentration in {{edu.concentration}}</span></em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													({{edu.startDate}} &ndash; {{edu.endDate}})</span>
+											</p>
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-indent: .5in; background: white;">
+												<span
+													style="font-size: 10pt; font-family: 'times new roman', times;">GPA:
+													{{edu.gpa}} </span>
+											</p>
+											<p
+												style="margin: 0in; margin-bottom: .0001pt; text-indent: .5in; background: white;">
+												<span
+													style="font-size: 10pt; font-family: 'times new roman', times;">Honors:
+													{{edu.honors}}</span>
+											</p>
+										</div>
+										<div *ngIf="resume['skillsEntityList'].length > 0">
+										<p
+											style="margin-bottom: .0001pt; line-height: normal; background: white;">
+											<strong><span
+												style="font-size: 10.0pt; font-family: 'Times New Roman', serif;"><span
+													style="font-family: 'times new roman', times;"> SKILLS</span></span></strong>
+										</p>
+										</div>
+										<div *ngFor="let skill of resume['skillsEntityList']">
+											<ul style="list-style-type: square;">
+												<li><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">{{skill.skillName}}</span></li>
+											</ul>
+										</div>
+										<div *ngIf="resume['projectsEntityList'].length > 0">
+										<p
+											style="margin-bottom: .0001pt; line-height: normal; background: white;">
+											<strong><span
+												style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">PROJECTS
+											</span></strong>
+										</p>
+										</div>
+										<div *ngFor="let proj of resume['projectsEntityList']">
+											<p
+												style="margin-bottom: 0.0001pt; line-height: normal; background: white; padding-left: 40px;">
+												<em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">{{proj.projectName}}
+														- {{proj.projectRole}}
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												</span></em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">&nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp;({{proj.startDate}} &ndash; {{proj.endDate}})</span>
+											</p>
+											<ul>
+												<li style="list-style-type: none;">
+													<ul>
+														<li style="list-style-type: none;">
+															<ul>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">
+																		{{proj.skillsA}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">
+																		{{proj.skillsB}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">
+																		{{proj.skillsC}}</span></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+											<p
+												style="line-height: 150%; background: white; margin: 0in 1.0in .0001pt 0in;">
+												<span
+													style="font-size: 10.0pt; line-height: 150%; font-family: 'Times New Roman', serif;">&nbsp;</span>
+											</p>
+										</div>
+										<div *ngIf="resume['workExperienceEntityList'].length > 0">
+										<p
+											style="margin-bottom: .0001pt; line-height: normal; background: white;">
+											<strong><span
+												style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">WORK
+													EXPERIENCE</span></strong>
+										</p>
+										</div>
+										<div *ngFor="let work of resume['workExperienceEntityList']">
+											<p style="background: white; margin: 0in 0in .0001pt .25in;">
+												<span style="font-family: 'times new roman', times;"><strong><span
+														style="font-size: 10.0pt;">{{work.company}}</span></strong></span>
+											</p>
+											<p
+												style="margin-bottom: 0.0001pt; line-height: normal; background: white; padding-left: 40px;">
+												<em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">{{work.title}}
+														&ndash; {{work.state}},
+														{{work.city}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												</span></em><span
+													style="font-size: 10.0pt; font-family: 'Times New Roman', serif;">&nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp;({{work.startDate}} &ndash; {{work.endDate}})</span>
+											</p>
+											<ul>
+												<li style="list-style-type: none;">
+													<ul>
+														<li style="list-style-type: none;">
+															<ul>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{work.skillsA}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{work.skillsB}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{work.skillsC}}</span></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+										<div *ngIf="resume['volunteerExperienceEntityList'].length > 0">
+										<p style="margin: 0in; margin-bottom: .0001pt; background: white;">
+											<span style="font-family: 'times new roman', times;"><strong><span
+													style="font-size: 10.0pt;">VOLUNTEER EXPERIENCE</span></strong></span>
+										</p>
+										</div>
+										<div *ngFor="let vol of resume['volunteerExperienceEntityList']">
+											<p style="background: white; margin: 0in 0in .0001pt .25in;">
+												<span style="font-family: 'times new roman', times;"><strong><span
+														style="font-size: 10.0pt;">{{vol.organizationName}}</span></strong></span>
+											</p>
+											<p style="background: white; margin: 0in 0in .0001pt .5in;">
+												<span style="font-family: 'times new roman', times;"><em><span
+														style="font-size: 10.0pt;">{{vol.role}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													</span></em><span style="font-size: 10.0pt;">&nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; ({{vol.startDate}} &ndash; {{vol.endDate}})</span></span>
+											</p>
+											<ul>
+												<li style="list-style-type: none;">
+													<ul>
+														<li style="list-style-type: none;">
+															<ul style="list-style-type: square;">
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{vol.skillsA}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{vol.skillsB}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{vol.skillsC}}</span></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+										<div *ngIf="resume['activityEntityList'].length > 0">
+										<p style="margin: 0in; margin-bottom: .0001pt; background: white;">
+											<span style="font-family: 'times new roman', times;"><strong><span
+													style="font-size: 10.0pt;">ACTIVITIES</span></strong></span>
+										</p>
+										</div>
+										<div *ngFor="let act of resume['activityEntityList']">
+											<p style="background: white; margin: 0in 0in .0001pt .25in;">
+												<span style="font-family: 'times new roman', times;"><strong><span
+														style="font-size: 10.0pt;">{{act.clubName}}</span></strong></span>
+											</p>
+											<p style="background: white; margin: 0in 0in .0001pt .5in;">
+												<span style="font-family: 'times new roman', times;"><em><span
+														style="font-size: 10.0pt;">{{act.title}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													</span></em><span style="font-size: 10.0pt;">&nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; ({{act.startDate}} &ndash; {{act.endDate}})</span></span>
+											</p>
+											<ul>
+												<li style="list-style-type: none;">
+													<ul>
+														<li style="list-style-type: none;">
+															<ul style="list-style-type: square;">
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{act.skillsA}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{act.skillsB}}</span></li>
+																<li><span
+																	style="font-size: 10.0pt; font-family: 'Times', serif;">{{act.skillsC}}</span></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+					
+									</div>
+									
+		
+									</mat-step>
+							<mat-step [stepControl]="userInfoFormGroup">
+									<form class="form" [formGroup]="defineuserinfo" (ngSubmit)="defineUserInfo(resume.resumeNumber)">	
+											<h1>User Info</h1>
+											<div class="navigation">
+																																														
+												<div class="form-group" >
+														  <button mat-button matStepperPrevious>
+															  Back
+														  </button>
+														<button mat-button type="submit" matStepperNext>
+															  Next
+														  </button>
+												  </div>
+
+											</div>							
+											<div class="form-group" >
+												  <label for="defineUserInfo"  >First Name:</label>
+												  <mat-form-field>
+													<input matInput id="firstname" type="text" class="form-control" formControlName="firstname" required>
+												  </mat-form-field>
+											</div>
+											<div class="form-group"  >
+												  <label for="defineUserInfo" >Last Name:</label>
+												  <mat-form-field>
+													<input matInput id="lastname" type="text" class="form-control" formControlName="lastname" required>
+												  </mat-form-field>
+											</div>
+											<div class="form-group" >
+												  <label for="defineUserInfo" >Email:</label>
+												  <mat-form-field>
+													<input matInput id="email" type="email" class="form-control" formControlName="email" required>
+												  </mat-form-field>
+											</div>	
+											<div class="form-group"  >
+												  <label for="defineUserInfo" >Phone Number:</label>
+												  <mat-form-field>
+													<input matInput id="phone" type="text" class="form-control" formControlName="phone" required>
+												  </mat-form-field>
+											</div>
+											<div class="form-group" >
+												  <label for="defineUserInfo" >LinkedIn (Optional):</label>
+												  <mat-form-field>
+													<input matInput id="linkedin" type="text" class="form-control" formControlName="linkedin">
+												  </mat-form-field>
+											</div>
+											<div class="form-group"  >
+												  <label for="defineUserInfo" >GitHub (Optional):</label>
+												  <mat-form-field>
+													<input matInput id="github" type="text" class="form-control" formControlName="github" required>
+												  </mat-form-field>
+											</div>	
+									
+							
+								</form>
+
+							
+							</mat-step>
+							<mat-step [stepControl]="educationFormGroup">
+								<form class="form" [formGroup]="defineeducation" (ngSubmit)="defineEducation(resume.resumeNumber)">	
+									<h1>Education Experience</h1>
+									<div class="navigation">
+																																												
+										<div class="form-group" >
+												  <button mat-button matStepperPrevious>
+													  Back
+												  </button>
+												<button mat-button type="submit" matStepperNext>
+													  Next
+												  </button>
+										  </div>
+
+									</div>							
+									<div class="form-group" >
+										  <label for="defineEducation"  >University Name:</label>
+										  <mat-form-field>
+											<input matInput id="universityName" type="text" class="form-control" formControlName="universityName" required>
+										  </mat-form-field>
+									</div>
+									<div class="form-group"  >
+										  <label for="defineEducation" >Degree Achieved:</label>
+										  <mat-form-field>
+											<input matInput id="degree" type="text" class="form-control" formControlName="degree" required>
+										  </mat-form-field>
+									</div>
+									<div class="form-group" >
+										  <label for="defineEducation" >Major:</label>
+										  <mat-form-field>
+											<input matInput id="major" type="text" class="form-control" formControlName="major" required>
+										  </mat-form-field>
+									</div>	
+									<div class="form-group"  >
+										  <label for="defineEducation" >Concentration:</label>
+										  <mat-form-field>
+											<input matInput id="concentration" type="text" class="form-control" formControlName="concentration" required>
+										  </mat-form-field>
+									</div>
+									<div class="form-group" >
+										  <label for="defineEducation" >City of Institution:</label>
+										  <mat-form-field>
+											<input matInput id="city" type="text" class="form-control" formControlName="city">
+										  </mat-form-field>
+									</div>
+									<div class="form-group"  >
+										  <label for="defineEducation" >State of Institution:</label>
+										  <mat-form-field>
+											<input matInput id="state" type="text" class="form-control" formControlName="state" required>
+										  </mat-form-field>
+									</div>	
+									<div class="form-group" >
+										  <label for="defineEducation" >Start Date:</label>
+										  <mat-form-field>
+											<input matInput id="startDate" type="text" class="form-control" formControlName="startDate" required>
+										  </mat-form-field>
+									</div>	
+									<div class="form-group"  >
+										  <label for="defineEducation" >End Date:</label>
+										  <mat-form-field>
+											<input matInput id="endDate" type="text" class="form-control" formControlName="endDate" required>
+										  </mat-form-field>
+									</div>
+
+
+									<div class="form-group" >
+			              				<label for="defineEducation" >Honors:</label>
+			              				<mat-form-field>
+			                				<input matInput id="honors" type="text" class="form-control" formControlName="honors" required>
+			              				</mat-form-field>
+			            			</div>
+									<div class="form-group"  >
+			              				<label for="defineEducation" >GPA:</label>
+			              				<mat-form-field>
+			                				<input matInput id="gpa" type="text" class="form-control" formControlName="gpa" required>
+			              				</mat-form-field>
+			            			</div>				
+					
+						</form>							
+
+							
+							</mat-step>
+							<mat-step [stepControl]="skillsFormGroup">
+							
+									<form class="form" [formGroup]="defineskills" (ngSubmit)="defineSkills(resume.resumeNumber)">
+										<h1>Skills</h1>
+												<div class="navigation">
+																        				            						            							            			
+							            			<div class="form-group" >
+						              						<button mat-button matStepperPrevious>
+						              							Back
+						              						</button>
+						                					<button mat-button type="submit" matStepperNext>
+						              							Next
+						              						</button>
+						              				</div>
+
+					            				</div>	
+												<div class="form-group"  >
+						              				<label for="defineSkills" >Skill:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillName" type="text" class="form-control" formControlName="skillName" required>
+						              				</mat-form-field>
+						            			</div>	
+									</form>
+							
+							</mat-step>
+							<mat-step [stepControl]="projectsFormGroup">
+									<form class="form" [formGroup]="defineprojects" (ngSubmit)="defineProjects(resume.resumeNumber)">	
+												<h1>Projects</h1>
+												<div class="navigation">
+																        				            						            							            			
+							            			<div class="form-group" >
+						              						<button mat-button matStepperPrevious>
+						              							Back
+						              						</button>
+						                					<button mat-button type="submit" matStepperNext>
+						              							Next
+						              						</button>
+						              				</div>
+
+					            				</div>							
+												<div class="form-group" >
+						              				<label for="defineProjects"  >Project Name:</label>
+						              				<mat-form-field>
+						                				<input matInput id="projectName" type="text" class="form-control" formControlName="projectName" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineProjects" >Role:</label>
+						              				<mat-form-field>
+						                				<input matInput id="projectRole" type="text" class="form-control" formControlName="projectRole" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineProjects" >Start Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="startDate" type="text" class="form-control" formControlName="startDate" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group"  >
+						              				<label for="defineProjects" >End Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="endDate" type="text" class="form-control" formControlName="endDate" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineProjects" >Skill 1:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillA" type="text" class="form-control" formControlName="skillsA" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineProjects" >Skill 2:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillB" type="text" class="form-control" formControlName="skillsB" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineProjects" >Skill 3:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillC" type="text" class="form-control" formControlName="skillsC" required>
+						              				</mat-form-field>
+						            			</div>	
+
+								
+									</form>
+							
+
+							
+							</mat-step>							
+							<mat-step [stepControl]="workExperienceFormGroup">
+								<div id="addWorkExperience">
+									<form class="form" [formGroup]="defineworkexperience" (ngSubmit)="defineWorkExperience(resume.resumeNumber)">	
+												<h1>Work Experience</h1>
+												<div class="navigation">
+																        				            						            							            			
+							            			<div class="form-group" >
+						              						<button mat-button matStepperPrevious>
+						              							Back
+						              						</button>
+						                					<button mat-button type="submit" matStepperNext>
+						              							Next
+						              						</button>
+						              				</div>
+
+					            				</div>							
+												<div class="form-group" >
+						              				<label for="defineWorkExperience"  >Company:</label>
+						              				<mat-form-field>
+						                				<input matInput id="company" type="text" class="form-control" formControlName="company" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineWorkExperience" >Title:</label>
+						              				<mat-form-field>
+						                				<input matInput id="title" type="text" class="form-control" formControlName="title" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineWorkExperience" >Start Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="startDate" type="text" class="form-control" formControlName="startDate" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group"  >
+						              				<label for="defineWorkExperience" >End Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="endDate" type="text" class="form-control" formControlName="endDate" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineWorkExperience" >City:</label>
+						              				<mat-form-field>
+						                				<input matInput id="city" type="text" class="form-control" formControlName="city" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineWorkExperience" >State:</label>
+						              				<mat-form-field>
+						                				<input matInput id="state" type="text" class="form-control" formControlName="state" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group" >
+						              				<label for="defineWorkExperience" >Skill 1:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillA" type="text" class="form-control" formControlName="skillsA" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineWorkExperience" >Skill 2:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillB" type="text" class="form-control" formControlName="skillsB" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineWorkExperience" >Skill 3:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillC" type="text" class="form-control" formControlName="skillsC" required>
+						              				</mat-form-field>
+						            			</div>	
+
+								
+									</form>
+								</div>
+							</mat-step>
+							<mat-step [stepControl]="volunteerExperienceFormGroup">
+							<form class="form" [formGroup]="definevolunteerexperience" (ngSubmit)="defineVolunteerExperience(resume.resumeNumber)">	
+												<h1>Volunteer Experience</h1>
+												<div class="navigation">
+																        				            						            							            			
+							            			<div class="form-group" >
+						              						<button mat-button matStepperPrevious>
+						              							Back
+						              						</button>
+						                					<button mat-button type="submit" matStepperNext>
+						              							Next
+						              						</button>
+						              				</div>
+
+					            				</div>							
+												<div class="form-group" >
+						              				<label for="defineVolunteerExperience"  >Organization:</label>
+						              				<mat-form-field>
+						                				<input matInput id="organization" type="text" class="form-control" formControlName="organization" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineVolunteerExperience" >Role:</label>
+						              				<mat-form-field>
+						                				<input matInput id="role" type="text" class="form-control" formControlName="role" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineVolunteerExperience" >Start Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="startDate" type="text" class="form-control" formControlName="startDate" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group"  >
+						              				<label for="defineVolunteerExperience" >End Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="endDate" type="text" class="form-control" formControlName="endDate" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineVolunteerExperience" >City:</label>
+						              				<mat-form-field>
+						                				<input matInput id="city" type="text" class="form-control" formControlName="city" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineVolunteerExperience" >State:</label>
+						              				<mat-form-field>
+						                				<input matInput id="state" type="text" class="form-control" formControlName="state" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group" >
+						              				<label for="defineVolunteerExperience" >Skill 1:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillA" type="text" class="form-control" formControlName="skillsA" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineVolunteerExperience" >Skill 2:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillB" type="text" class="form-control" formControlName="skillsB" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineVolunteerExperience" >Skill 3:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillC" type="text" class="form-control" formControlName="skillsC" required>
+						              				</mat-form-field>
+						            			</div>	
+
+								
+									</form>
+							</mat-step>
+							<mat-step [stepControl]="activityFormGroup">
+							<form  class="form" [formGroup]="defineactivity" (ngSubmit)="defineActivity(resume.resumeNumber)">
+									<h1>Activities</h1>
+												<div class="navigation">
+																        				            						            							            			
+							            			<div class="form-group" >
+						              						<button mat-button matStepperPrevious>
+						              							Back
+						              						</button>
+						                					<button mat-button type="submit" matStepperNext>
+						              							View Updates
+						              						</button>
+						              				</div>
+
+					            				</div>	
+					            			<div class="form-group" >
+						              				<label for="defineActivity"  >Club Name:</label>
+						              				<mat-form-field>
+						                				<input matInput id="clubName" type="text" class="form-control" formControlName="clubName" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineActivity" >Title:</label>
+						              				<mat-form-field>
+						                				<input matInput id="title" type="text" class="form-control" formControlName="title" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group" >
+						              				<label for="defineActivity" >Start Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="startDate" type="text" class="form-control" formControlName="startDate" required>
+						              				</mat-form-field>
+						            			</div>	
+												<div class="form-group"  >
+						              				<label for="defineActivity" >End Date:</label>
+						              				<mat-form-field>
+						                				<input matInput id="endDate" type="text" class="form-control" formControlName="endDate" required>
+						              				</mat-form-field>
+						            			</div>
+								
+
+												<div class="form-group" >
+						              				<label for="defineActivity" >Skill 1:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillA" type="text" class="form-control" formControlName="skillsA" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineActivity" >Skill 2:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillB" type="text" class="form-control" formControlName="skillsB" required>
+						              				</mat-form-field>
+						            			</div>
+												<div class="form-group"  >
+						              				<label for="defineActivity" >Skill 3:</label>
+						              				<mat-form-field>
+						                				<input matInput id="skillC" type="text" class="form-control" formControlName="skillsC" required>
+						              				</mat-form-field>
+						            			</div>		
+					            			
+							</form>
+
+							
+							</mat-step>
+
+					</mat-horizontal-stepper>
+				</div>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</main>
+
+</body>
+</html>

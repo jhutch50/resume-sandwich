@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Moho 12.5 build 22438 -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Frame_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920px" height="1080px">
+<path fill="#fbeac6" fill-rule="evenodd" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 65.216 423.504 C 65.296 423.517 864.846 547.798 864.926 547.811 C 865.025 547.793 1855.140 373.798 1855.239 373.780 C 1855.163 373.771 1092.895 282.647 1092.822 282.622 C 1092.727 282.660 65.319 423.490 65.216 423.504 Z"/>
+<path fill="none" stroke="#efb165" stroke-width="1" stroke-linecap="butt" stroke-linejoin="round" d="M 1855.239 373.780 C 1855.140 373.798 865.025 547.793 864.926 547.811 "/>
+<path fill="none" stroke="#efb165" stroke-width="1" stroke-linecap="butt" stroke-linejoin="round" d="M 864.926 547.811 C 864.846 547.798 65.296 423.517 65.216 423.504 "/>
+<path fill="#efb165" fill-rule="evenodd" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M 1884.244 568.529 C 1884.241 568.510 1864.907 438.697 1855.239 373.780 C 1855.140 373.798 865.025 547.793 864.926 547.811 C 864.846 547.798 65.296 423.517 65.216 423.504 C 67.978 499.469 73.502 651.378 73.502 651.400 C 73.580 651.414 852.417 788.124 852.495 788.138 C 852.598 788.116 1884.141 568.551 1884.244 568.529 Z"/>
+</svg>
