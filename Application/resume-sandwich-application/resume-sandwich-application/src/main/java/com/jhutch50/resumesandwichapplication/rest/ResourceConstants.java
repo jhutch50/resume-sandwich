@@ -9,4 +9,5 @@ public class ResourceConstants {
 	public static final String 	RESUME_EDUCATION_V1 = "/resume/education/v1";
 	public static final String 	RESUME_ACTIVITY_V1 = "/resume/activity/v1";
 	public static final String RESUME_DISPLAY = "/resume/resumeDisplay/v1";
+	public static final String RESUME_ETHIC_V1 = "/resume/ethic/v1";
 }

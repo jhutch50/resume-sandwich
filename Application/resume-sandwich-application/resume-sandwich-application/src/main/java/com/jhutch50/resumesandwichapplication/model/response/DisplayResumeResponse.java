@@ -9,6 +9,7 @@ import com.jhutch50.resumesandwichapplication.entity.SkillsEntity;
 import com.jhutch50.resumesandwichapplication.entity.UserInfoEntity;
 import com.jhutch50.resumesandwichapplication.entity.VolunteerExperienceEntity;
 import com.jhutch50.resumesandwichapplication.entity.WorkExperienceEntity;
+import com.jhutch50.resumesandwichapplication.entity.EthicEntity;
 import com.jhutch50.resumesandwichapplication.model.Links;
 
 public class DisplayResumeResponse {
@@ -18,6 +19,8 @@ public class DisplayResumeResponse {
 	private Integer resumeNumber;
 
 	private List<WorkExperienceEntity> workExperienceEntityList;
+	
+	private List<EthicEntity> ethicEntityList;
 
 	private List<EducationEntity> educationEntityList;
 
@@ -36,9 +39,10 @@ public class DisplayResumeResponse {
 	public DisplayResumeResponse(Integer resumeNumber, List<WorkExperienceEntity> workExperienceEntityList,
 			List<EducationEntity> educationEntityList, List<SkillsEntity> skillsEntityList,
 			List<ProjectsEntity> projectsEntityList, List<VolunteerExperienceEntity> volunteerExperienceEntityList,
-			List<ActivityEntity> activityEntityList, List<UserInfoEntity> userInfoEntityList, Links links) {
+			List<ActivityEntity> activityEntityList, List<UserInfoEntity> userInfoEntityList, List<EthicEntity> ethicEntityList, Links links) {
 		super();
 		this.resumeNumber = resumeNumber;
+		this.ethicEntityList = ethicEntityList;
 		this.workExperienceEntityList = workExperienceEntityList;
 		this.educationEntityList = educationEntityList;
 		this.skillsEntityList = skillsEntityList;
@@ -115,6 +119,14 @@ public class DisplayResumeResponse {
 
 	public void setActivityEntityList(List<ActivityEntity> activityEntityList) {
 		this.activityEntityList = activityEntityList;
+	}
+	
+	public List<EthicEntity> getEthicEntityList() {
+		return ethicEntityList;
+	}
+
+	public void setEthicEntityList(List<EthicEntity> ethicEntityList) {
+		this.ethicEntityList = ethicEntityList;
 	}
 
 	public List<UserInfoEntity> getUserInfoEntityList() {

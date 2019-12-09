@@ -25,7 +25,8 @@ public class ResumeEntityToDisplayResumeResponseConverter implements Converter<R
 			displayResumeResponse.setVolunteerExperienceEntityList(source.getVolunteerExperienceEntityList());
 			displayResumeResponse.setSkillsEntityList(source.getSkillsEntityList());
 			displayResumeResponse.setWorkExperienceEntityList(source.getWorkExperienceEntityList());
-		
+			displayResumeResponse.setEthicEntityList(source.getEthicEntityList());
+			
 		Links links = new Links();
 		Self self = new Self();
 		self.setRef(ResourceConstants.RESUME_DISPLAY + "/" + source.getId());

@@ -55,6 +55,9 @@ public class ResumeEntity {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<UserInfoEntity> userInfoEntityList;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EthicEntity> ethicEntityList;
 
 	public ResumeEntity() {
 
@@ -100,6 +103,28 @@ public class ResumeEntity {
 			workExperienceEntityList = new ArrayList<>();
 
 		workExperienceEntityList.remove(workExperienceEntity);
+	}
+	
+	public List<EthicEntity> getEthicEntityList() {
+		return ethicEntityList;
+	}
+
+	public void setEthicEntityList(List<EthicEntity> ethicEntityList) {
+		this.ethicEntityList = ethicEntityList;
+	}
+
+	public void addEthicEntity(EthicEntity ethicEntity) {
+		if (null == ethicEntityList)
+			ethicEntityList = new ArrayList<>();
+
+		ethicEntityList.add(ethicEntity);
+	}
+	
+	public void removeEthicEntity(EthicEntity ethicEntity) {
+		if (null == ethicEntityList)
+			ethicEntityList = new ArrayList<>();
+
+		ethicEntityList.remove(ethicEntity);
 	}
 
 	public List<EducationEntity> getEducationEntityList() {

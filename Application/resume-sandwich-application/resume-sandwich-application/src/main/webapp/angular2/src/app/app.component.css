@@ -1,130 +1,302 @@
-html{
-	margin: 0;
-	padding: 0;
-	background-color: rgb(0, 0, 0);
-	min-height:100%;
-	min-width:1027px;
-	position:relative;
+html {
+	margin          : 0;
+	padding         : 0;
+	background-color: rgb(255, 255, 255);
+	min-height      : 100%;
+	min-width       : 1027px;
+	position        : relative
 }
 
 body {
-	height: 100%;
-	min-width:1027px;
-}
-main{
-	position: relative;
-}
-#mainpage {
-	display: block;
-	background-color: rgb(255, 255, 255);
-	min-width: 727px;
-	max-width: 800px;
-	margin-left: 300px;
-	position: relative;
-
+	height   : 100%;
+	min-width: 1027px;
+	background-color: rgb(0, 162, 255);
 }
 
-#fields{
-	display: block;
-	height: 1000px;
+main {
 	position: relative;
-	margin-bottom:10px;
+	
 }
 
-#doctest{
-	display:block;
-	position:relative;
-	background-color: white;
-	border-style: solid;
+header {
+	display         : block;
+	background-color: rgb(11, 0, 58);
+	min-width       : 100%;
+	height          : 100px;
+	margin-right    : 10px;
+	margin-bottom   : 20px;
+	position        : relative
+}
+
+input {
+	
+	margin: 10px
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+	margin: 10px;
 	border: 10px;
 	border-color: black;
-	margin: 10px;
-
 }
-header {
+
+form label {
+	margin: 10px
+}
+
+footer {
+	position  : absolute;
+	bottom    : 0;
+	widows    : 100%;
+	height    : 60px;
+	background: #6cf
+}
+
+
+header img{
 	display: block;
-	background-color: rgb(0, 0, 0);
-	min-width: 1177px;
-	height: 100px;
-	margin-right: 10px;
+	padding-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
 	position: relative;
 }
-#sidebar {
-	display: block;
-	background-color: rgb(0, 0, 0);
-	width: 300px;
-	float: left;
-	padding-left: 10px;
-	padding: 10px;
-	margin-bottom: 0px;
-	height:1000px;
+
+button {
+	background-color: black;
+	color:#fff;
+	border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 12px 20px;
+    display: inline-block;
+    text-decoration: none;
+    transition: all .15s ease-in;
+	line-height: 22px;
+	height: 50px;
+	width: 150px;
+	
 
 }
-#sidebar img{
-	height:100px;
-	width:250px;
-	margin: 10px;
-}
-#sidebar li{
-	display: block;
-	background-color: red;
-	width: auto;
-	height: 30px;
-	list-style: none;
-	margin-right: 40px;
 
-	padding: 5px;
+#resume-portal {
+	display         : block;
+	position        : relative;
+	background-color: #fff;
+	border-style    : solid;
+	border          : 10px;
+	border-color    : #000;
+	margin          : 30px;
+
+}
+
+
+.statement {
+	width: 500px;
+	border: 4px solid #dab845;
+}
+.fields {
+	display      : block;
+	height       : 1000px;
+	position     : relative;
+	margin-bottom: 10px;
+	border: 4px solid #dab845;
+}
+
+.fields h1{
 	text-align: center;
-	margin-bottom:10px;
 }
-input{
-	width: 200px;
-	margin: 10px;
+.sidebar {
+	display         : block;
+	background-color: rgb(255, 255, 255);
+	width           : 300px;
+	float           : left;
+	padding-left    : 10px;
+	padding         : 10px;
+	margin-bottom   : 0;
+	margin-left		: 20px;
+	border: 4px solid #dab845;
 }
-#headline h1 {
-	display: block;
-	background-color: rgba(0, 0, 0);
-	color: white;
+.inner-sidebar {
+	padding: 30px 0;
+	border: 4px solid #dab845;
+	background-color: rgb(255, 241, 115);
+	border: 0.5px solid rgba(255, 217, 0, 0.527);
+}
 
-	margin-top: 0px;
-	min-width:800px;
-	min-height:50px;
-	float: left;
-	position:relative;
+.sidebar img {
+	height: 100px;
+	width : 250px;
+	margin: 10px
+	
+}
+
+.sidebar li {
+	display         : block;
+	width           : auto;
+	height          : 30px;
+	list-style      : none;
+	margin-right    : 40px;
+	padding         : 5px;
+	text-align      : center;
+
+    
+}
+
+.resume-builder {
+	display         : block;
+	background-color: #fff;
+	min-width       : 727px;
+	max-width       : 800px;
+	margin-left     : 400px;
+
+	position        : relative
+}
+
+.headline h1 {
+	display         : block;
+	background-color: rgb(255, 255, 255);
+	color           : #fff;
+	margin-top      : 0;
+	min-width       : 800px;
+	min-height      : 50px;
+	float           : left;
+	position        : relative
+}
+
+
+
+::ng-deep .mat-horizontal-stepper-header-container {
+	display: none !important;
+  }
+
+::ng-deep .mat-stepper-horizontal ng-tns-c1-0 mat-stepper-label-position-end{
+	padding: 0px;
+}
+
+
+
+.navigation {
+	display      : block;
+	align-content: center;
+	padding-top: 20px;
+	display: flex;
+	justify-content: center;
+	height: 100px;
+	background-color: rgb(255, 241, 115);
+	border: 0.5px solid rgba(255, 217, 0, 0.527);
+	margin: 0px 30px;
+}
+
+.navigation button {
+	margin: 5px;
 
 	
 }
 
-#triangle{
-	width: 0;
-	height: 0;
-	border-top: 0px solid transparent;
-	border-left: 50px solid rgb(0, 0, 0);
-	border-bottom: 50px solid transparent;
-	float: right;
-	position: absolute;
-	margin-left: 800px;
-
+.navigation button:hover {
+	background-color: #ff4800;
+	transform: scale(1.15) perspective(1px);
 }
 
-form label{
+.navigation button:active {
+  background-color: #b32a00;
+  box-shadow: 0 5px rgb(75, 24, 0);
+  transform: translateY(4px);
+}
+
+::ng-deep .mat-form-field{
 	margin: 10px;
-}
-.navigation{
-	display:block;
-	align-content: center;
-	margin-top: 10px;
-	margin-right: 235px;
-	margin-left:245px;
-}
-.navigation button{
-	margin: 5px;
+	width: 470px;
 }
 
-footer {
-position:absolute;
-bottom:0;
-widows: 100%;
-height:60px;
-background:#6cf;
-}
+@media only screen and (max-width: 600px) {
+	/* For tablets: */
+	html {
+		min-width       : 100%;
+	}
+	
+	body {
+		min-width: 100%;
+	}
+
+	header {
+		min-width		: 515px;
+		margin			: 0px;
+		position		: relative;
+	}
+	.sidebar {
+		visibility		: hidden;
+		position        : relative
+	}
+	.resume-builder {
+		min-width		: 451px;
+		width			: 10px;
+		margin			: 20px;
+		position        : relative
+	}
+
+	.headline h1 {
+		min-width		: 100%;
+	}
+
+	::ng-deep .mat-horizontal-stepper-header-container {
+		visibility: hidden;
+		display: none;
+	  }
+	::ng-deep .mat-horizontal-content-container {
+		min-width		: 451px;
+		transform		: translate(0px, 50px);
+		display			: block;
+		position: absolute;
+
+	  }
+
+
+	.navigation {
+		width: 330px;
+	}
+	.navigation button {
+		margin: 5px;
+		padding: 5px;
+		width: 100px;
+		text-align: center;
+	
+		
+	}
+
+	.statement{
+		width: 390px;
+	}
+	
+	.navigation button:hover {
+		background-color: #ff4800;
+		transform: scale(1.15) perspective(1px);
+	}
+	
+	.navigation button:active {
+	  background-color: #b32a00;
+	  box-shadow: 0 5px rgb(75, 24, 0);
+	  transform: translateY(4px);
+	}
+
+	::ng-deep .mat-form-field{
+
+		width: 370px;
+	}
+
+	::ng-deep .mat-form-field input{
+
+		width: 200px;
+	}
+
+  }
+
+
+
+
+

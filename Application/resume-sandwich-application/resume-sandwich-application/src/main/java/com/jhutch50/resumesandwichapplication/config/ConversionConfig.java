@@ -20,7 +20,8 @@ import converter.SkillsRequestToSkillsEntityConverter;
 import converter.UserInfoRequestToUserInfoEntityConverter;
 import converter.VolunteerExperienceRequestToVolunteerExperienceEntityConverter;
 import converter.ResumeEntityToDisplayResumeResponseConverter;
-
+import converter.EthicRequestToEthicEntityConverter;
+import converter.EthicEntityToEthicResponseConverter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +45,8 @@ public class ConversionConfig {
 		converters.add(new SkillsRequestToSkillsEntityConverter());
 		converters.add(new UserInfoRequestToUserInfoEntityConverter());
 		converters.add(new VolunteerExperienceRequestToVolunteerExperienceEntityConverter());
+		converters.add(new EthicRequestToEthicEntityConverter());
+		converters.add(new EthicEntityToEthicResponseConverter());
 		converters.add(new ResumeEntityToDisplayResumeResponseConverter());
 
 		return converters;

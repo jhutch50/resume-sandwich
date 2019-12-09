@@ -20,12 +20,22 @@ export class AppComponent implements OnInit {
     constructor(private http: Http) {
 
     }
+
+//stepper functions
+    @ViewChild('stepper') private myStepper: MatStepper;
+    goSkills(stepper : MatStepper){
+        
+        stepper.selectedIndex=3;
+        console.log(stepper.selectedIndex);
+    }
+
     //Get URLs
     private baseUrl: string = 'http://localhost:8080';
     private getGeneralUrl: string = this.baseUrl + '/resume/resumeDisplay/v1';
     private workExperienceGetUrl: string = this.baseUrl + '/resume/workExperience/v1';
     private userInfoGetUrl: string = this.baseUrl + '/resume/userInfo/v1';    
     private activityGetUrl: string = this.baseUrl + '/resume/activity/v1';
+    private ethicGetUrl: string = this.baseUrl + '/resume/ethic/v1';
     private educationGetUrl: string = this.baseUrl + '/resume/education/v1';
     private projectsGetUrl: string = this.baseUrl + '/resume/projects/v1';
     private skillsGetUrl: string = this.baseUrl + '/resume/skills/v1';
@@ -34,6 +44,7 @@ export class AppComponent implements OnInit {
     private userInfoPostUrl: string = this.baseUrl + '/resume/userInfo/v1/';
     private workExperiencePostUrl: string = this.baseUrl + '/resume/workExperience/v1/';
     private activityPostUrl: string = this.baseUrl + '/resume/activity/v1/';
+    private ethicPostUrl: string = this.baseUrl + '/resume/ethic/v1/';
     private educationPostUrl: string = this.baseUrl + '/resume/education/v1/';
     private projectsPostUrl: string = this.baseUrl + '/resume/projects/v1/';
     private skillsPostUrl: string = this.baseUrl + '/resume/skills/v1/';
@@ -48,6 +59,7 @@ export class AppComponent implements OnInit {
     defineworkexperience: FormGroup;
     defineuserinfo: FormGroup;
     defineactivity: FormGroup;
+    defineethic: FormGroup;
     defineeducation: FormGroup;
     defineprojects: FormGroup;
     defineskills: FormGroup;
@@ -57,6 +69,7 @@ export class AppComponent implements OnInit {
     workExperienceRequest: DefineWorkExperienceRequest;
     userInfoRequest: DefineUserInfoRequest;
     activityRequest: DefineActivityRequest;
+    ethicRequest: DefineEthicRequest;
     educationRequest: DefineEducationRequest;
     projectsRequest: DefineProjectsRequest;
     skillsRequest: DefineSkillsRequest;
@@ -93,6 +106,9 @@ export class AppComponent implements OnInit {
     currentActivitySkillsC: string;
     currentActivityStartDate: string;
     currentActivityEndDate: string;
+    //ethic currents
+    currentEthicResumeId: string;
+    currentEthicEthicStatement: string;
     //education currents
     currentEducationResumeId: string;
     currentEducationUniversityName: string;
@@ -211,6 +227,10 @@ export class AppComponent implements OnInit {
             startDate: new FormControl(''),
             endDate: new FormControl('')
         });
+        this.defineethic = new FormGroup({
+            resumeId: new FormControl(''),
+            ethicStatement: new FormControl('')
+        });
 
 
         //3. Set constants for form groups based on ValueChanges$
@@ -222,6 +242,7 @@ export class AppComponent implements OnInit {
         const defineworkexperienceValueChanges$ = this.defineworkexperience.valueChanges;
         const definevolunteerexperienceValueChanges$ = this.definevolunteerexperience.valueChanges;
         const defineactivityValueChanges$ = this.defineactivity.valueChanges;
+        const defineethicValueChanges$ = this.defineethic.valueChanges;
         
        //4. subscribe the values from the ValueChanges to the currentWorkExperience values
         defineworkexperienceValueChanges$.subscribe(valChange => {
@@ -254,6 +275,12 @@ export class AppComponent implements OnInit {
             this.currentActivitySkillsC = valChange.skillsC;
             this.currentActivityStartDate = valChange.startDate;
             this.currentActivityEndDate = valChange.endDate;
+
+        });
+       defineethicValueChanges$.subscribe(valChange => {
+            this.currentActivityResumeId = valChange.resumeId;
+            this.currentEthicEthicStatement = valChange.ethicStatement;
+
 
         });
         defineeducationValueChanges$.subscribe(valChange => {
@@ -371,6 +398,22 @@ export class AppComponent implements OnInit {
         }
         window.location.reload();
     }
+    
+    defineEthic(value: string) {
+
+        this.ethicRequest = new DefineEthicRequest(value, 
+        this.currentEthicEthicStatement
+        );
+        //condition for post
+        
+        if(this.currentEthicEthicStatement!=''){
+            if(this.currentEthicEthicStatement!=null){
+            this.postFinalResume(this.ethicRequest, this.ethicPostUrl);
+                }
+        }
+    
+    }
+    
     defineEducation(value: string) {
 
             this.educationRequest = new DefineEducationRequest(value, 
@@ -496,7 +539,7 @@ export class AppComponent implements OnInit {
         //POSTs the object using a subsribe
         this.http.post(postUrl, bodyString, options)
             .subscribe(res => console.log(res));
-        window.location.reload();
+ //       window.location.reload();
     }
 
     mapResume(response:Response):Resume[] {
@@ -505,7 +548,7 @@ export class AppComponent implements OnInit {
 
     //function for the pdf export from html2pdf
     download(): void {
-       var resumefit = document.getElementById('doctest');
+       var resumefit = document.getElementById("resume-portal");
         resumefit.style.width="800px";
         var pageHeight = resumefit.offsetHeight;
         var eachPageHeight = 300;
@@ -548,7 +591,8 @@ export interface Resume {
     projectsEntityList: any[],
     workExperienceEntityList: any[],
     collegeEngagementEntityList: any[],
-    volunteerExperienceEntityList: any[]
+    volunteerExperienceEntityList: any[],
+    ethicEntityList: any[]
 }
 //6. Define classes
 
@@ -656,6 +700,27 @@ export class DefineActivityRequest {
 
     }
 }
+
+
+
+export class DefineEthicRequest {
+
+        resumeId: string;
+        ethicStatement: string;
+
+
+   
+    constructor(
+        resumeId: string,
+        ethicStatement: string
+      
+    ) {
+        this.resumeId = resumeId;
+        this.ethicStatement = ethicStatement;
+    }
+}
+
+
 export class DefineEducationRequest {
 
         resumeId: string;
@@ -792,4 +857,6 @@ export class DefineVolunteerExperienceRequest {
 
     }
 }
+
+
 
